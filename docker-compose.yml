@@ -19,6 +19,8 @@ services:
     ports:
       - "9090:9090"
     volumes:
+      - prometheus-data:/prometheus
+    volumes:
       - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
   pushgateway:
     container_name: comp-pushgateway
@@ -30,3 +32,5 @@ services:
 
 volumes:
   grafana-vol:
+  prometheus-data:
+  
