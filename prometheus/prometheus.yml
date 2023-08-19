@@ -1,0 +1,28 @@
+# PROMETHEUS CONFIG
+global:
+  scrape_interval: 5s
+  evaluation_interval: 15s
+  # scrape_timeout is set to the global default (10s).
+
+# Alertmanager configuration
+#alerting:
+#  alertmanagers:
+#    - static_configs:
+#        - targets:
+#          - localhost:9093
+
+# Load rules once and periodically evaluate them according to the global 'evaluation_interval'.
+rule_files:
+  # - "rules.yml"
+
+scrape_configs:
+  # prometheus instance metrics
+  - job_name: "prometheus"
+    static_configs:
+      - targets: ["localhost:9090"]
+
+  # pushgateway using docker container (host)name
+  - job_name: "pushgateway"
+    honor_labels: true
+    static_configs:
+      - targets: ["comp-pushgateway:9091"]
